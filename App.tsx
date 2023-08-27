@@ -10,7 +10,8 @@ import React, {
 } from 'react';
 import {
   View,
-  StatusBar
+  StatusBar,
+  StyleSheet,
 } from 'react-native';
 
 import "./src/api/index.ts";
@@ -84,7 +85,7 @@ const App = (): JSX.Element => {
   }, [false]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={styles.container}>
       <StatusBar
         translucent
         backgroundColor={'transparent'}
@@ -95,5 +96,12 @@ const App = (): JSX.Element => {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    backgroundColor: 'white'
+  },
+});
 
 export default App;

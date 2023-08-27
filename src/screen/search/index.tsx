@@ -75,43 +75,24 @@ const Search = ({ navigation, route }: { navigation: any, route: any }): JSX.Ele
   const renderUser: ListRenderItem<UserType> = ({ item, index }) => {
     return (
       <TouchableOpacity
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginHorizontal: 10,
-          marginVertical: 4,
-          borderRadius: 10,
-          backgroundColor: 'lightblue',
-        }}
+        style={styles.userContainer}
         onPress={() => onPressUserItem(item)} >
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-          }}>
-          <Text
-            style={{
-              fontSize: 20,
-              color: 'black',
-            }}>
+        {/* User's Initial */}
+        <View style={styles.userNameInitContainer}>
+          <Text style={styles.userNameInitText}>
             {`${item.firstName[0]} ${item.lastName[0]}`}
           </Text>
         </View>
         <View>
-          <View>
-            <Text
-              style={{
-                color: 'black',
-              }}>
+          {/* Name */}
+          <View style={styles.userNameContainer}>
+            <Text style={styles.userNameText}>
               {`${item.firstName} ${item.lastName}`}
             </Text>
           </View>
-          <View>
-            <Text
-              style={{
-                color: 'black',
-              }}>
+          {/* Email */}
+          <View style={styles.userEmailContainer}>
+            <Text style={styles.userEmailText}>
               {`${item.email}`}
             </Text>
           </View>
@@ -162,6 +143,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#f2f2f2',
     color: BLACK,
+  },
+  userContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 10,
+    marginVertical: 4,
+    borderRadius: 10,
+    backgroundColor: 'lightblue',
+  },
+  userNameInitContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  userNameInitText: {
+    fontSize: 20,
+    color: 'black',
+  },
+  userNameContainer: {},
+  userNameText: {
+    color: 'black',
+  },
+  userEmailContainer: {},
+  userEmailText: {
+    color: 'black',
   },
 });
 

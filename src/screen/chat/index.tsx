@@ -55,49 +55,24 @@ const Chat = ({ navigation, route }: { navigation: any, route: Object }): JSX.El
             flexGrow: 1,
           }}
           ListEmptyComponent={
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: GREY,
-                }}>
+            <View style={styles.emptyComponentContainer}>
+              <Text style={styles.emptyComponentText}>
                 Start your conversation by sending Hii!
               </Text>
             </View>
           }
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            margin: 10,
-          }}>
+        <View style={styles.messageInputContainer}>
           <TextInput
-            style={{
-              flex: 1,
-              borderRadius: 10,
-              marginRight: 10,
-              paddingHorizontal: 10,
-              backgroundColor: '#f2f2f2',
-            }}
+            style={styles.messageInput}
             value={message}
             onChangeText={setMessage}
             placeholder="Enter your message" />
           {message.length > 0 &&
             <Pressable
+              style={styles.sendButtonContainer}
               onPress={sendMessage}>
-              <Text
-                style={{
-                  color: 'black',
-                  backgroundColor: 'lightblue',
-                  padding: 10,
-                  fontSize: 16,
-                  borderRadius: 10,
-                }}>
+              <Text style={styles.sendButtonText}>
                 Send
               </Text>
             </Pressable>
@@ -115,6 +90,34 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     flex: 1,
+  },
+  emptyComponentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyComponentText: {
+    color: GREY,
+  },
+  messageInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 10,
+  },
+  messageInput: {
+    flex: 1,
+    borderRadius: 10,
+    marginRight: 10,
+    paddingHorizontal: 10,
+    backgroundColor: '#f2f2f2',
+  },
+  sendButtonContainer: {},
+  sendButtonText: {
+    color: 'black',
+    backgroundColor: 'lightblue',
+    padding: 10,
+    fontSize: 16,
+    borderRadius: 10,
   },
 });
 

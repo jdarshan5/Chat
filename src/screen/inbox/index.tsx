@@ -18,6 +18,7 @@ import store, { RootState } from "../../store";
 import { useSelector } from "react-redux";
 import { fetchConversation } from "../../store/conversation/actions";
 import { ConversationType, SELECT_CONVERSATION } from "../../store/conversation/reducer";
+import { UserType } from "../../store/user/reducer";
 
 const Inbox = ({ navigation, route }: { navigation: any, route: Object }): JSX.Element => {
 
@@ -29,10 +30,6 @@ const Inbox = ({ navigation, route }: { navigation: any, route: Object }): JSX.E
     console.log('Inbox screen');
     init();
   }, [false]);
-
-  // useEffect(() => {
-  //   // if(socket.co)
-  // }, [socket.connected]);
 
   const init = () => {
     setLoading(true);
@@ -47,49 +44,28 @@ const Inbox = ({ navigation, route }: { navigation: any, route: Object }): JSX.E
   }
 
   const renderConversations: ListRenderItem<ConversationType> = ({ item, index }) => {
-    const ind = item.members.find((i: any) => i._id !== store.getState().user.user._id);
+    const ind: UserType | undefined = item.members.find((i: any) => i._id !== store.getState().user.user._id);
     if(item.messages.length === 0) {
       return null;
     }
     return (
       <TouchableOpacity
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          margin: 10,
-          borderRadius: 10,
-          backgroundColor: 'lightblue',
-        }}
+        style={styles.conversationContainer}
         onPress={() => onPressConversationItem(item)}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-          }}>
-          <Text
-            style={{
-              fontSize: 20,
-              color: 'black',
-            }}>
-            {`${ind?.firstName[0]} ${ind.lastName[0]}`}
+        <View style={styles.userInitContainer}>
+          <Text style={styles.userInitText}>
+            {`${ind?.firstName[0]} ${ind?.lastName[0]}`}
           </Text>
         </View>
         <View>
-          <View>
-            <Text
-              style={{
-                color: 'black',
-              }}>
-              {`${ind.firstName} ${ind.lastName}`}
+          <View style={styles.userNameContainer}>
+            <Text style={styles.userNameText}>
+              {`${ind?.firstName} ${ind?.lastName}`}
             </Text>
           </View>
-          <View>
-            <Text
-              style={{
-                color: 'black',
-              }}>
-              {`${ind.email}`}
+          <View style={styles.userEmailContainer}>
+            <Text style={styles.userEmailText}>
+              {`${ind?.email}`}
             </Text>
           </View>
         </View>
@@ -112,6 +88,30 @@ const Inbox = ({ navigation, route }: { navigation: any, route: Object }): JSX.E
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  conversationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 10,
+    borderRadius: 10,
+    backgroundColor: 'lightblue',
+  },
+  userInitContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  userInitText: {
+    fontSize: 20,
+    color: 'black',
+  },
+  userNameContainer: {},
+  userNameText: {
+    color: 'black',
+  },
+  userEmailContainer: {},
+  userEmailText: {
+    color: 'black',
   },
 });
 

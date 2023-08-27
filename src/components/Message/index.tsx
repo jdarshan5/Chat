@@ -4,6 +4,7 @@ import React, {
 import {
   View,
   Text,
+  StyleSheet,
 } from "react-native";
 
 import { useSelector } from "react-redux";
@@ -32,31 +33,40 @@ const Message = ({ message }: MessageComponent): JSX.Element => {
   }, [message]);
 
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: message.sender !== user._id ? 'flex-start' : 'flex-end',
-        marginHorizontal: 15,
-        marginVertical: 4,
-      }}>
-      <View
-        style={{
-          backgroundColor: 'lightblue',
-          paddingHorizontal: 10,
-          paddingVertical: 4,
-          borderRadius: 10,
-          maxWidth: '80%',
-        }}>
-        <Text
-          style={{
-            color: 'black',
-            fontSize: 16,
-          }}>
+    <View style={
+      [
+        styles.container,
+        {
+          justifyContent: message.sender !== user._id ? 'flex-start' : 'flex-end'
+        }
+      ]
+    }>
+      <View style={styles.messageBody}>
+        <Text style={styles.messageText}>
           {`${message.message}`}
         </Text>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    marginHorizontal: 15,
+    marginVertical: 4,
+  },
+  messageBody: {
+    backgroundColor: 'lightblue',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 10,
+    maxWidth: '80%',
+  },
+  messageText: {
+    color: 'black',
+    fontSize: 16,
+  },
+});
 
 export default Message;
